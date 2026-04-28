@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle | Candidato de Elite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00FFA3', // Verde Esmeralda Vibrante
+                        primaryDark: '#00CC82',
+                        bgDeep: '#0A0A0A', // Preto Profundo
+                        surface: '#111111', // Cinza Grafite
+                        muted: '#A1A1AA', // Cinza Médio para textos secundários
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'], // Para elementos "hacker"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* === ANIMAÇÕES DE ALTA PERFORMANCE BASEADAS NO DESIGN SYSTEM === */
+        body {
+            background-color: #0A0A0A;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        .fade-in-up {
+            will-change: opacity, transform;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Ruído de fundo para textura "Dark High-Tech" */
+        .noise-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        /* Gradiente Escuro para as Thumbnails (Netflix Style) */
+        .gradient-netflix {
+            background: linear-gradient(to top, #0A0A0A 0%, rgba(10, 10, 10, 0.9) 20%, rgba(10, 10, 10, 0.4) 60%, transparent 100%);
+        }
+
+        /* Efeito de Rim Light (Luz de Contorno) no Hover */
+        .card-elite {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-elite:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 163, 0.15), inset 0 0 20px rgba(0, 255, 163, 0.05);
+            border-color: rgba(0, 255, 163, 0.4);
+            transform: translateY(-5px);
+        }
+
+        /* Botão Pill */
+        .btn-pill {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(0, 255, 163, 0.6);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative">
+
+    <div class="fixed inset-0 noise-bg z-0"></div>
+    <div class="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+    <header class="relative z-20 border-b border-white/5 bg-bgDeep/80 backdrop-blur-md sticky top-0">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <div class="w-2 h-2 bg-primary rounded-full animate-pulse shadow-[0_0_10px_#00FFA3]"></div>
+                <h1 class="font-mono text-sm font-bold tracking-[0.2em] uppercase text-white hover:text-primary transition-colors">JONES <span class="text-primary">TALENT</span> GROUP</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-muted text-sm hidden md:block font-mono">Bem-vindo, Candidato de Elite</span>
+                <button class="w-10 h-10 rounded-full border border-primary/30 overflow-hidden bg-surface hover:border-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-bgDeep">
+                    <img src="./assets/logo-login.png" alt="Avatar User" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300">
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-20 container mx-auto px-6 py-12 lg:py-16">
+        
+        <div class="mb-12 fade-in-up">
+            <span class="font-mono text-primary text-xs uppercase tracking-widest block mb-2">_ STATUS: SISTEMA ONLINE</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+                Área de <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#00CC82]">ELITE.</span>
+            </h2>
+            <p class="text-muted max-w-2xl text-lg">Acesse os protocolos | Hackeie sua carreira | O sistema está pronto para você.</p>
+        </div>
+
+        <h3 class="text-xl font-bold mb-6 flex items-center gap-3 fade-in-up delay-100">
+            <i class="fa-solid fa-bolt text-primary drop-shadow-[0_0_8px_rgba(0,255,163,0.5)]"></i> Seus Acessos Liberados
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            
+            <a href="#curso-1" class="card-elite group relative rounded-2xl overflow-hidden aspect-[3/4] bg-surface border border-white/5 fade-in-up delay-100 cursor-pointer block">
+                <img src="./assets/1.0. mockup-hero-section.png" alt="Método Candidato de Elite" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                
+                <div class="absolute inset-0 gradient-netflix"></div>
+                
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                    <div class="flex justify-between items-start">
+                        <span class="bg-bgDeep/80 backdrop-blur-sm border border-primary text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(0,255,163,0.2)]">PRO</span>
+                        <span class="bg-black/50 backdrop-blur-md px-2 py-1 rounded text-xs font-mono text-white/70"><i class="fa-solid fa-file text-primary text-[10px] mr-1"></i> Arquivo</span>
+                    </div>
+                    
+                    <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <h4 class="text-2xl font-extrabold text-white leading-tight mb-1">Método<br>Candidato Elite</h4>
+                        <p class="text-xs text-muted font-mono mb-4">Venda o seu Talento</p>
+                        
+                        <div class="w-full bg-white/10 rounded-full h-1 mb-4 overflow-hidden" title="10% Concluído">
+                            <div class="bg-primary h-1 rounded-full shadow-[0_0_10px_#00FFA3]" style="width: 0%"></div>
+                        </div>
+                        
+                        <button class="btn-pill w-full bg-primary text-bgDeep font-bold py-3 px-4 rounded-full text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-book"></i> ACESSAR AGORA 
+                        </button>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#curso-2" class="card-elite group relative rounded-2xl overflow-hidden aspect-[3/4] bg-surface border border-white/5 fade-in-up delay-200 cursor-pointer block">
+                <img src="./assets/Pacote de Prompts de Elite - Arsenal Copia e Cola.png" alt="Simulador de Entrevistas GPT" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 gradient-netflix"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                    <div class="flex justify-between items-start">
+                        <span class="bg-bgDeep/80 backdrop-blur-sm border border-primary text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(0,255,163,0.2)]">BÔNUS</span>
+                        <span class="bg-black/50 backdrop-blur-md px-2 py-1 rounded text-xs font-mono text-white/70">Prompts</span>
+                    </div>
+                    <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <h4 class="text-2xl font-extrabold text-white leading-tight mb-1">Pack de Prompts<br>"Copia e Cola"</h4>
+                        <p class="text-xs text-muted font-mono mb-4"> Copie, cole e tenha o texto de um candidato de elite sem precisar digitar uma única palavra.</p>
+                        <div class="w-full bg-white/10 rounded-full h-1 mb-4 overflow-hidden" title="0% Concluído">
+                            <div class="bg-primary h-1 rounded-full shadow-[0_0_10px_#00FFA3]" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-pill w-full bg-primary text-bgDeep font-bold py-3 px-4 rounded-full text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Acessar
+                        </button>
+                    </div>
+                </div>
+            </a>
+            <a href="#curso-2" class="card-elite group relative rounded-2xl overflow-hidden aspect-[3/4] bg-surface border border-white/5 fade-in-up delay-200 cursor-pointer block">
+                <img src="./assets/simulador-recrutador-bonus-02.png" alt="Simulador de Entrevistas GPT" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 gradient-netflix"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                    <div class="flex justify-between items-start">
+                        <span class="bg-bgDeep/80 backdrop-blur-sm border border-primary text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(0,255,163,0.2)]">BÔNUS</span>
+                        <span class="bg-black/50 backdrop-blur-md px-2 py-1 rounded text-xs font-mono text-white/70">Inteligência Artificial</span>
+                    </div>
+                    <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <h4 class="text-2xl font-extrabold text-white leading-tight mb-1">Agente GPT<br>Exclusivo</h4>
+                        <p class="text-xs text-muted font-mono mb-4">Simulador de Recrutador</p>
+                        <div class="w-full bg-white/10 rounded-full h-1 mb-4 overflow-hidden" title="0% Concluído">
+                            <div class="bg-primary h-1 rounded-full shadow-[0_0_10px_#00FFA3]" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-pill w-full bg-primary text-bgDeep font-bold py-3 px-4 rounded-full text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play"></i> Acessar
+                        </button>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#curso-3" class="card-elite group relative rounded-2xl overflow-hidden aspect-[3/4] bg-surface border border-white/5 fade-in-up delay-300 cursor-pointer block">
+                <img src="./assets/pacote-2-1-bonus-03.png" alt="Dossiê de Aprovação JTG" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                <div class="absolute inset-0 gradient-netflix"></div>
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                    <div class="flex justify-between items-start">
+                        <span class="bg-primary text-bgDeep text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(0,255,163,0.5)]">NOVO</span>
+                    </div>
+                    <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <h4 class="text-2xl font-extrabold text-white leading-tight mb-1">Pacote <br>2 em 1</h4>
+                        <p class="text-xs text-muted font-mono mb-4">Bot de Mentoria + Bot de Diagnóstico</p>
+                        <div class="w-full bg-white/10 rounded-full h-1 mb-4 overflow-hidden" title="0% Concluído">
+                            <div class="bg-primary h-1 rounded-full shadow-[0_0_10px_#00FFA3]" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-pill w-full bg-primary text-bgDeep font-bold py-3 px-4 rounded-full text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-robot"></i> ACESSAR OS BOTS
+                        </button>
+                    </div>
+                </div>
+            </a>
+
+            <div class="group relative rounded-2xl overflow-hidden aspect-[3/4] bg-surface border border-white/5 opacity-70 hover:opacity-100 transition-all duration-500 fade-in-up delay-300 cursor-not-allowed">
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80" alt="Mentoria Insider" class="absolute inset-0 w-full h-full object-cover grayscale-[80%] opacity-50 group-hover:opacity-60 transition-opacity">
+                <div class="absolute inset-0 gradient-netflix"></div>
+                
+                <div class="absolute inset-0 flex items-center justify-center z-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+                    <i class="fa-solid fa-lock text-6xl text-white"></i>
+                </div>
+
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                    <div class="flex justify-between items-start">
+                        <span class="bg-white/10 border border-white/20 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest backdrop-blur-md"><i class="fa-solid fa-lock mr-1"></i> VIP</span>
+                    </div>
+                    <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <h4 class="text-2xl font-extrabold text-white leading-tight mb-1">Acelerador<br>Insider</h4>
+                        <p class="text-xs text-muted font-mono mb-4">Análise de Perfil Individual</p>
+                        <button class="w-full bg-white/5 border border-white/10 text-white font-bold py-3 px-4 rounded-full text-sm uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-white/10 hover:border-white/30 transition-all shadow-lg backdrop-blur-sm cursor-pointer">
+                            Desbloquear
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- === CAMADA DE SEGURANÇA 1: BLOQUEIO DE CLIQUE DIREITO === -->
+    <script>
+        document.addEventListener('contextmenu', function(event) {
+            // Previne a abertura do menu de contexto (clique direito)
+            event.preventDefault();
+        }, { passive: false });
+
+        // 2. Bloqueio de Atalhos de Teclado (Anti-DevTools)
+        document.addEventListener('keydown', function(event) {
+            // Bloqueia a tecla F12
+            if (event.key === 'F12' || event.keyCode === 123) {
+                event.preventDefault();
+                return false;
+            }
+            
+            // Bloqueia comandos com Ctrl + Shift + (I, C, J)
+            if (event.ctrlKey && event.shiftKey && (
+                event.key === 'I' || event.key === 'i' || event.keyCode === 73 || // DevTools
+                event.key === 'C' || event.key === 'c' || event.keyCode === 67 || // Inspecionar Elemento
+                event.key === 'J' || event.key === 'j' || event.keyCode === 74    // Console
+            )) {
+                event.preventDefault();
+                return false;
+            }
+            
+            // Bloqueia comandos com Ctrl + (U, S)
+            if (event.ctrlKey && (
+                event.key === 'U' || event.key === 'u' || event.keyCode === 85 || // Exibir código-fonte
+                event.key === 'S' || event.key === 's' || event.keyCode === 83    // Salvar página
+            )) {
+                event.preventDefault();
+                return false;
+            }
+        }, { passive: false });
+
+        // 3. Bloqueio de Seleção de Texto e Cópia (Anti-Copy)
+        // Aplica o user-select: none dinamicamente no body para não precisar de nova tag <style>
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none'; // Para Safari
+        document.body.style.msUserSelect = 'none'; // Para Edge/IE
+        document.body.style.mozUserSelect = 'none'; // Para Firefox
+
+        // Intercepta e anula os eventos nativos de seleção, cópia e arraste
+        ['selectstart', 'copy', 'cut', 'paste', 'dragstart'].forEach(function(eventType) {
+            document.addEventListener(eventType, function(event) {
+                event.preventDefault();
+                return false;
+            }, { passive: false });
+        });s
+    </script>
+
+</body>
+</html>
