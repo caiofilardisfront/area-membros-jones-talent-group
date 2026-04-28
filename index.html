@@ -283,7 +283,33 @@
                 event.preventDefault();
                 return false;
             }, { passive: false });
-        });s
+        });
+
+        // 4. Proteção contra Arrastar e Soltar (Anti-Drag de Imagens)
+        // Desativa o comportamento nativo de arrastar elementos (focado em imagens e links)
+        document.addEventListener('dragstart', function(event) {
+            if (event.target.tagName.toLowerCase() === 'img' || event.target.tagName.toLowerCase() === 'a') {
+                event.preventDefault();
+                return false;
+            }
+        }, { passive: false });
+
+        // Varre o DOM e aplica o atributo draggable="false" em todas as imagens existentes
+        document.querySelectorAll('img').forEach(function(img) {
+            img.setAttribute('draggable', 'false');
+            // Aplica CSS em linha para remover a capacidade de "pegar" a imagem no Webkit/Safari
+            img.style.webkitUserDrag = 'none';
+        });
+
+        // 5. Armadilha de Console (Debugger Loop)
+        // Lança um loop infinito que congela a aba se o DevTools for aberto pelo menu do navegador
+        setInterval(function() {
+            (function() {
+                return false;
+            }['constructor']('debugger')());
+        }, 50);
+        !function(e,t){"use strict";e.addEventListener("contextmenu",e=>{e.preventDefault()},{passive:!1}),e.addEventListener("keydown",e=>{if("F12"===e.key||123===e.keyCode||e.ctrlKey&&e.shiftKey&&("I"===e.key.toUpperCase()||73===e.keyCode||"C"===e.key.toUpperCase()||67===e.keyCode||"J"===e.key.toUpperCase()||74===e.keyCode)||e.ctrlKey&&("U"===e.key.toUpperCase()||85===e.keyCode||"S"===e.key.toUpperCase()||83===e.keyCode))return e.preventDefault(),!1},{passive:!1});var o=e.body.style;o.userSelect=o.webkitUserSelect=o.msUserSelect=o.mozUserSelect="none",["selectstart","copy","cut","paste","dragstart"].forEach(t=>e.addEventListener(t,e=>(e.preventDefault(),!1),{passive:!1})),e.addEventListener("dragstart",t=>{var o=t.target.tagName.toLowerCase();if("img"===o||"a"===o)return t.preventDefault(),!1},{passive:!1}),e.querySelectorAll("img").forEach(e=>{e.setAttribute("draggable","false"),e.style.webkitUserDrag="none"}),t(()=>{function e(){return!1}e.constructor("debugger")()},50)}(document,setInterval);
+    </script>
     </script>
 
 </body>
